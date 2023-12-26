@@ -1,6 +1,7 @@
 package com.amadeus.casestudy.repository;
 
 import com.amadeus.casestudy.model.Flight;
+import com.amadeus.casestudy.model.RoundTripDto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -23,7 +24,7 @@ public class SearchRepositoryImpl implements SearchRepository {
     }
 
     @Override
-    public Iterable<Flight> searchFlights(String departureAirport, String arrivalAirport, Date departureTime, Date returnTime) {
+    public Iterable<Flight> searchFlights(String departureAirport, String arrivalAirport, Date departureTime) {
         // First three parameters are all ANDed together conditionally
         // If return time is present, then ADD the following results as well:
         //   departure -- arrival airports swapped and flight.departureTime = returnTime
@@ -42,12 +43,15 @@ public class SearchRepositoryImpl implements SearchRepository {
             predicates.add(cb.equal(root.get("departure_time"), departureTime));
         }
 
-        if (returnTime != null) {
-            // TODO
-        }
-
         cq.where(predicates.toArray(new Predicate[0]));
 
         return em.createQuery(cq).getResultList();
+    }
+
+    @Override
+    public RoundTripDto searchFlights(String departureAirport, String arrivalAirport, Date departureTime, Date returnTime) {
+        Iterable<Flight> outboundFlights = searchFlights(departureAirport, arrivalAirport, departureTime);
+        Iterable<Flight> inboundFlights = searchFlights(arrivalAirport, departureAirport, returnTime);
+        return new RoundTripDto(outboundFlights, inboundFlights);
     }
 }
