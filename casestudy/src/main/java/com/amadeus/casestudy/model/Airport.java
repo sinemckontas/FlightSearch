@@ -1,10 +1,26 @@
 package com.amadeus.casestudy.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
+
+@Entity
 public class Airport {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String airport_code;
     private String city;
+
+    public Airport() {
+    }
+
+    public Airport(String airport_code, String city) {
+        this.airport_code = airport_code;
+        this.city = city;
+    }
 
     public int getId() {
         return id;

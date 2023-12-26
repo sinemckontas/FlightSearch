@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightController {
 
     @RequestMapping("/")
-    public String getFlight(){
+    public String getFlight() {
         return "Hi you're good";
     }
 

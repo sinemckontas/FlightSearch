@@ -1,13 +1,34 @@
 package com.amadeus.casestudy.model;
-import java.util.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
+
+import java.util.Date;
+
+@Entity
 public class Flight {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String departure;
     private String arrival;
     private Date departure_time;
     private Date arrival_time;
     private double price;
+
+    public Flight() {
+    }
+
+    public Flight(String departure, String arrival, Date departure_time, Date arrival_time, double price) {
+        this.departure = departure;
+        this.arrival = arrival;
+        this.departure_time = departure_time;
+        this.arrival_time = arrival_time;
+        this.price = price;
+    }
 
     public int getId() {
         return id;
