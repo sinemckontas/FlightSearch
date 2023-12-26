@@ -20,6 +20,15 @@ public class AirportController {
         return airportRepository.findAll();
     }
 
+    @GetMapping("/airport/{airportId}")
+    public Airport getAirport(@PathVariable Integer airportId) {
+        Optional<Airport> airport = airportRepository.findById(airportId);
+        if (airport.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Airport with ID: " + airportId.toString() + " not found.");
+        }
+        return airport.get();
+    }
+
     @PostMapping("/airports")
     public Airport addAirport(@RequestBody Airport airport) {
         return airportRepository.save(airport);

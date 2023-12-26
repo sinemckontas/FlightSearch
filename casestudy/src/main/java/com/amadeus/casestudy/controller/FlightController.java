@@ -18,8 +18,17 @@ public class FlightController {
     }
 
     @GetMapping("/flights")
-    public Iterable<Flight> getFlight() {
+    public Iterable<Flight> getFlights() {
         return flightRepository.findAll();
+    }
+
+    @GetMapping("/flight/{flightId}")
+    public Flight getFlight(@PathVariable Integer flightId) {
+        Optional<Flight> flight = flightRepository.findById(flightId);
+        if (flight.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight with ID: " + flightId.toString() + " not found.");
+        }
+        return flight.get();
     }
 
     @PostMapping("/flights")
