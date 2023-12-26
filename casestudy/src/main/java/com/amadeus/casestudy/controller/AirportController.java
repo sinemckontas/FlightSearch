@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+@RestController
 public class AirportController {
     private final AirportRepository airportRepository;
 
