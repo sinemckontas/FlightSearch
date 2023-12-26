@@ -7,7 +7,7 @@ import java.util.Date;
 
 public interface SearchRepository {
 
-    public Iterable<Flight> searchFlights(String departureAirport, String arrivalAirport, Date departureTime);
+    Iterable<Flight> searchFlights(String departureAirport, String arrivalAirport, Date departureTime);
 
-    public RoundTripDto searchFlights(String departureAirport, String arrivalAirport, Date departureTime, Date returnTime);
+    RoundTripDto searchFlights(String departureAirport, String arrivalAirport, Date departureTime, Date returnTime);
 }

@@ -2,6 +2,7 @@ package com.amadeus.casestudy.controller;
 
 import com.amadeus.casestudy.model.Flight;
 import com.amadeus.casestudy.repository.FlightRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -9,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
+@SecurityRequirement(name = "basicAuth")
 public class FlightController {
 
     private final FlightRepository flightRepository;

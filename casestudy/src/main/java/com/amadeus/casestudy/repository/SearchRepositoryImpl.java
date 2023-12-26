@@ -20,7 +20,7 @@ public class SearchRepositoryImpl implements SearchRepository {
 
     @Autowired
     public SearchRepositoryImpl(JpaContext context) {
-        this.em = context.getEntityManagerByManagedType(Flight.class);;
+        this.em = context.getEntityManagerByManagedType(Flight.class);
     }
 
     @Override
